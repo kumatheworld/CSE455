@@ -20,6 +20,8 @@ float get_pixel(image im, int x, int y, int c)
 void set_pixel(image im, int x, int y, int c, float v)
 {
     // TODO Fill this in
+    int idx = serialize_index(im, x, y, c);
+    im.data[idx] = v;
 }
 
 image copy_image(image im)
