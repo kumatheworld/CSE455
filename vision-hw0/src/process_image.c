@@ -4,6 +4,12 @@
 #include <math.h>
 #include "image.h"
 
+int serialize_index(image im, int x, int y, int c) {
+    int w = im.w;
+    int h = im.h;
+    return c*h*w + y*w + x;
+}
+
 float get_pixel(image im, int x, int y, int c)
 {
     // TODO Fill this in
