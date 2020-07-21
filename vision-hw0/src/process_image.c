@@ -28,6 +28,7 @@ image copy_image(image im)
 {
     image copy = make_image(im.w, im.h, im.c);
     // TODO Fill this in
+    memcpy(copy.data, im.data, im.w * im.h * im.c * sizeof(float));
     return copy;
 }
 
