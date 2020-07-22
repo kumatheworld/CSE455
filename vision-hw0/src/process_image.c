@@ -76,6 +76,9 @@ float clamp(float x) {
 void clamp_image(image im)
 {
     // TODO Fill this in
+    for (int idx = 0; idx < im.w * im.h * im.c; idx++) {
+        im.data[idx] = clamp(im.data[idx]);
+    }
 }
 
 
