@@ -54,6 +54,13 @@ image rgb_to_grayscale(image im)
 void shift_image(image im, int c, float v)
 {
     // TODO Fill this in
+    const int im_size = im.w * im.h;
+    const int start = im_size * c;
+    const int end = start + im_size;
+
+    for (int idx = start; idx < end; idx++) {
+        im.data[idx] += v;
+    }
 }
 
 void clamp_image(image im)
