@@ -159,4 +159,55 @@ void rgb_to_hsv(image im)
 void hsv_to_rgb(image im)
 {
     // TODO Fill this in
+    const int im_size = im.w * im.h;
+    for (int idx = 0; idx < im_size; idx++) {
+        int idx_r = idx;
+        int idx_g = idx + im_size;
+        int idx_b = idx + 2 * im_size;
+        float H = im.data[idx_r];
+        float S = im.data[idx_g];
+        float V = im.data[idx_b];
+        float R, G, B;
+
+        float H_ = 6 * H;
+        if (H_ > 5) {
+            H_ -= 6;
+        }
+        float C = S * V;
+        float m = V - C;
+        if (H_ <= 1) {
+            R = V;
+            if (H_ < 0) {
+                G = m;
+                B = G - H_ * C;
+            } else {
+                B = m;
+                G = B + H_ * C;
+            }
+        } else if (H_ <= 3) {
+            H_ -= 2;
+            G = V;
+            if (H_ < 0) {
+                B = m;
+                R = B - H_ * C;
+            } else {
+                R = m;
+                B = R + H_ * C;
+            }
+        } else {
+            H_ -= 4;
+            B = V;
+            if (H_ < 0) {
+                R = m;
+                G = R - H_ * C;
+            } else {
+                G = m;
+                R = G + H_ * C;
+            }
+        }
+
+        im.data[idx_r] = R;
+        im.data[idx_g] = G;
+        im.data[idx_b] = B;
+    }
 }
