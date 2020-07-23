@@ -114,6 +114,46 @@ float three_way_min(float a, float b, float c)
 void rgb_to_hsv(image im)
 {
     // TODO Fill this in
+    const int im_size = im.w * im.h;
+    for (int idx = 0; idx < im_size; idx++) {
+        int idx_r = idx;
+        int idx_g = idx + im_size;
+        int idx_b = idx + 2 * im_size;
+        float R = im.data[idx_r];
+        float G = im.data[idx_g];
+        float B = im.data[idx_b];
+        float H, S, V;
+
+        V = three_way_max(R, G, B);
+
+        float m = three_way_min(R, G, B);
+        float C = V - m;
+        if (C <= 0) {
+            S = 0;
+            H = 0;
+        } else {
+            S = C / V;
+            float H_;
+
+            if (V == R) {
+                H_ = (G - B) / C;
+            } else if (V == G) {
+                H_ = (B - R) / C + 2;
+            } else  {
+                H_ = (R - G) / C + 4;
+            }
+
+            if (H_ < 0) {
+                H = H_ / 6  + 1;
+            } else {
+                H = H_ / 6;
+            }
+        }
+
+        im.data[idx_r] = H;
+        im.data[idx_g] = S;
+        im.data[idx_b] = V;
+    }
 }
 
 void hsv_to_rgb(image im)
