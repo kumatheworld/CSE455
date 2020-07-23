@@ -27,6 +27,8 @@ int clamp(int x, int left, int right) {
 float get_pixel(image im, int x, int y, int c)
 {
     // TODO Fill this in
+    x = clamp(x, 0, im.w);
+    y = clamp(y, 0, im.h);
     int idx = serialize_index(im, x, y, c);
     return im.data[idx];
 }
