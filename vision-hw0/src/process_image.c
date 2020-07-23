@@ -36,8 +36,10 @@ float get_pixel(image im, int x, int y, int c)
 void set_pixel(image im, int x, int y, int c, float v)
 {
     // TODO Fill this in
-    int idx = serialize_index(im, x, y, c);
-    im.data[idx] = v;
+    if (valid_idx(x, im.w) && valid_idx(y, im.h) && valid_idx(c, im.c)) {
+        int idx = serialize_index(im, x, y, c);
+        im.data[idx] = v;
+    }
 }
 
 image copy_image(image im)
