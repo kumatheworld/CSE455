@@ -10,6 +10,10 @@ int serialize_index(image im, int x, int y, int c) {
     return c*h*w + y*w + x;
 }
 
+int valid_idx(int idx, int length) {
+    return 0 <= idx && idx < length;
+}
+
 float get_pixel(image im, int x, int y, int c)
 {
     // TODO Fill this in
