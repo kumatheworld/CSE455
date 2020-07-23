@@ -14,6 +14,16 @@ int valid_idx(int idx, int length) {
     return 0 <= idx && idx < length;
 }
 
+int clamp(int x, int left, int right) {
+    if (x < left) {
+        return left;
+    } else if (x >= right) {
+        return right - 1;
+    } else {
+        return x;
+    }
+}
+
 float get_pixel(image im, int x, int y, int c)
 {
     // TODO Fill this in
@@ -67,7 +77,7 @@ void shift_image(image im, int c, float v)
     }
 }
 
-float clamp(float x) {
+float clamp01(float x) {
     if (x < 0) {
         return 0;
     } else if (x > 1) {
@@ -81,7 +91,7 @@ void clamp_image(image im)
 {
     // TODO Fill this in
     for (int idx = 0; idx < im.w * im.h * im.c; idx++) {
-        im.data[idx] = clamp(im.data[idx]);
+        im.data[idx] = clamp01(im.data[idx]);
     }
 }
 
