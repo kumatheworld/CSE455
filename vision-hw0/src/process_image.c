@@ -211,3 +211,15 @@ void hsv_to_rgb(image im)
         im.data[idx_b] = B;
     }
 }
+
+void scale_image(image im, int c, float v)
+{
+    // TODO Fill this in
+    const int im_size = im.w * im.h;
+    const int start = im_size * c;
+    const int end = start + im_size;
+
+    for (int idx = start; idx < end; idx++) {
+        im.data[idx] *= v;
+    }
+}
