@@ -66,6 +66,6 @@ float bilinear_interpolate(image im, float x, float y, int c)
 image bilinear_resize(image im, int w, int h)
 {
     // TODO
-    return make_image(1,1,1);
+    return resize(*bilinear_interpolate, im, w, h);
 }
 
