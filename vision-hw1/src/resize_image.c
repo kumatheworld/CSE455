@@ -4,7 +4,9 @@
 float nn_interpolate(image im, float x, float y, int c)
 {
     // TODO Fill in
-    return 0;
+    int xi = round(x);
+    int yi = round(y);
+    return get_pixel(im, xi, yi, c);
 }
 
 image nn_resize(image im, int w, int h)
