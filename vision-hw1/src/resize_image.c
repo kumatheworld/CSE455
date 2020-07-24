@@ -1,6 +1,10 @@
 #include <math.h>
 #include "image.h"
 
+float get_coord_for_interp(int z, int l_old, int l_new) {
+    return (z + .5) * l_old / l_new - .5;
+}
+
 float nn_interpolate(image im, float x, float y, int c)
 {
     // TODO Fill in
