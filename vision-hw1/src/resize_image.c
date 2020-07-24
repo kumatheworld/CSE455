@@ -40,7 +40,27 @@ image nn_resize(image im, int w, int h)
 float bilinear_interpolate(image im, float x, float y, int c)
 {
     // TODO
-    return 0;
+    if (x < 0) {
+        x = -1;
+    }
+    if (y < 0) {
+        y = -1;
+    }
+
+    int xi = (int)x;
+    int yi = (int)y;
+    float tl = get_pixel(im, xi, yi, c);
+    float tr = get_pixel(im, xi + 1, yi, c);
+    float bl = get_pixel(im, xi, yi + 1, c);
+    float br = get_pixel(im, xi + 1, yi + 1, c);
+
+    float x_frac = x - xi;
+    float y_frac = y - yi;
+    float top = (1 - x_frac) * tl + x_frac * tr;
+    float bottom = (1 - x_frac) * bl + x_frac * br;
+    float middle = (1 - y_frac) * top + y_frac * bottom;
+
+    return middle;
 }
 
 image bilinear_resize(image im, int w, int h)
