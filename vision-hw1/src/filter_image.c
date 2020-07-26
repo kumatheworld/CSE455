@@ -54,7 +54,14 @@ void convolve_image_channel(image im, image filter, image im_new, int im_c, int 
 image convolve_image(image im, image filter, int preserve)
 {
     // TODO
-    return make_image(1,1,1);
+    assert(filter.c == im.c || filter.c == 1);
+    image im_new = make_image(im.w, im.h, preserve ? im.c : 1);
+    for (int c = 0; c < im.c; c++) {
+        int filter_c = filter.c == im.c ? c : 0;
+        int im_new_c = preserve ? c : 0;
+        convolve_image_channel(im, filter, im_new, c, filter_c, im_new_c);
+    }
+    return im_new;
 }
 
 image make_highpass_filter()
