@@ -9,6 +9,7 @@ typedef struct{
 } image;
 
 // Basic operations
+int serialize_index(image im, int x, int y, int c);
 float get_pixel(image im, int x, int y, int c);
 void set_pixel(image im, int x, int y, int c, float v);
 image copy_image(image im);
