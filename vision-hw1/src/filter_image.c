@@ -9,6 +9,14 @@
 void l1_normalize(image im)
 {
     // TODO
+    const int im_size = im.w * im.h * im.c;
+    float sum = 0;
+    for (int idx = 0; idx < im_size; idx++) {
+        sum += im.data[idx];
+    }
+    for (int idx = 0; idx < im_size; idx++) {
+        im.data[idx] /= sum;
+    }
 }
 
 image make_box_filter(int w)
