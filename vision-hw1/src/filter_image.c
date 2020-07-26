@@ -30,6 +30,27 @@ image make_box_filter(int w)
     return im;
 }
 
+void convolve_image_channel(image im, image filter, image im_new, int im_c, int filter_c, int im_new_c)
+{
+    int idx_im_new = serialize_index(im_new, 0, 0, im_new_c);
+    int y_start = -(filter.h / 2);
+    int y_end = y_start + im.h;
+    for (int y = y_start; y < y_end; y++) {
+        int x_start = -(filter.w / 2);
+        int x_end = x_start + im.w;
+        for (int x = x_start; x < x_end; x++) {
+            int idx_filter = serialize_index(filter, 0, 0, filter_c);
+            for (int y_ = 0; y_ < filter.h; y_++) {
+                for (int x_ = 0; x_ < filter.w; x_++) {
+                    float im_data = get_pixel(im, x + x_, y + y_, im_c);
+                    im_new.data[idx_im_new] += im_data * filter.data[idx_filter++];
+                }
+            }
+            idx_im_new++;
+        }
+    }
+}
+
 image convolve_image(image im, image filter, int preserve)
 {
     // TODO
