@@ -97,7 +97,7 @@ image make_emboss_filter()
 }
 
 // Question 2.2.1: Which of these filters should we use preserve when we run our convolution and which ones should we not? Why?
-// Answer: TODO
+// Answer: The sharpen filter and the emboss filter are the ones we should we use preserve for because they sum up to 1.
 
 // Question 2.2.2: Do we have to do any post-processing for the above filters? Which ones and why?
 // Answer: TODO
