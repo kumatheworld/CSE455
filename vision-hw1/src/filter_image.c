@@ -83,7 +83,9 @@ image make_highpass_filter()
 image make_sharpen_filter()
 {
     // TODO
-    return make_image(1,1,1);
+    image filter = make_highpass_filter();
+    filter.data[4] += 1;
+    return filter;
 }
 
 image make_emboss_filter()
