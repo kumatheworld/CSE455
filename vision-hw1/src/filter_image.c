@@ -100,7 +100,7 @@ image make_emboss_filter()
 // Answer: The sharpen filter and the emboss filter are the ones we should we use preserve for because they sum up to 1.
 
 // Question 2.2.2: Do we have to do any post-processing for the above filters? Which ones and why?
-// Answer: TODO
+// Answer: We need post-processing for the emboss filter because it is something like the edge filters, which need post-processing like non-maximum suppression.
 
 image make_gaussian_filter(float sigma)
 {
