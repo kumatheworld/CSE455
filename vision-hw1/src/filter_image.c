@@ -75,7 +75,9 @@ image make_filter_from_array(int w, int h, int a[]) {
 image make_highpass_filter()
 {
     // TODO
-    return make_image(1,1,1);
+    int a[9] = {0, -1, 0, -1, 4, -1, 0, -1, 0};
+    image filter = make_filter_from_array(3, 3, a);
+    return filter;
 }
 
 image make_sharpen_filter()
