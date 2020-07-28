@@ -64,7 +64,7 @@ image convolve_image(image im, image filter, int preserve)
     return im_new;
 }
 
-image make_filter_from_array(int w, int h, int a[]) {
+image make_filter_from_array(int w, int h, float a[]) {
     image filter = make_image(w, h, 1);
     for (int idx = 0; idx < w * h; idx++) {
         filter.data[idx] = a[idx];
@@ -75,7 +75,7 @@ image make_filter_from_array(int w, int h, int a[]) {
 image make_highpass_filter()
 {
     // TODO
-    int a[9] = {0, -1, 0, -1, 4, -1, 0, -1, 0};
+    float a[9] = {0, -1, 0, -1, 4, -1, 0, -1, 0};
     image filter = make_filter_from_array(3, 3, a);
     return filter;
 }
@@ -91,7 +91,7 @@ image make_sharpen_filter()
 image make_emboss_filter()
 {
     // TODO
-    int a[9] = {-2, -1, 0, -1, 1, 1, 0, 1, 2};
+    float a[9] = {-2, -1, 0, -1, 1, 1, 0, 1, 2};
     image filter = make_filter_from_array(3, 3, a);
     return filter;
 }
