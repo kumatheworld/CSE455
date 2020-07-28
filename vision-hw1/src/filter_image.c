@@ -105,7 +105,23 @@ image make_emboss_filter()
 image make_gaussian_filter(float sigma)
 {
     // TODO
-    return make_image(1,1,1);
+    const int l = (6 * sigma + 1) / 2;
+    const int w = 2 * l + 1;
+    const float neg_inv_2sigma2 = -1 / (2 * sigma * sigma);
+
+    image filter = make_image(w, w, 1);
+    int idx = 0;
+    for (int y = -l; y <= l; y++) {
+        int y2 = y * y;
+        for (int x = -l; x <= l; x++) {
+            int x2 = x * x;
+            int r2 = x2 + y2;
+            filter.data[idx++] = exp(r2 * neg_inv_2sigma2);
+        }
+    }
+
+    l1_normalize(filter);
+    return filter;
 }
 
 image add_image(image a, image b)
