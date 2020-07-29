@@ -158,7 +158,7 @@ float sub(float x, float y)
 image sub_image(image a, image b)
 {
     // TODO
-    return make_image(1,1,1);
+    return op_image(sub, a, b);
 }
 
 image make_gx_filter()
