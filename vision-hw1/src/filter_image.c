@@ -124,6 +124,21 @@ image make_gaussian_filter(float sigma)
     return filter;
 }
 
+image op_image(float (*op)(float, float), image a, image b)
+{
+    const float w = a.w;
+    const float h = a.h;
+    const float c = a.c;
+    const int same_shape = b.w == w && b.h == h && b.c == c;
+    assert(same_shape);
+
+    image im = make_image(w, h, c);
+    for (int idx = 0; idx < w * h * c; idx++) {
+        im.data[idx] = op(a.data[idx], b.data[idx]);
+    }
+    return im;
+}
+
 image add_image(image a, image b)
 {
     // TODO
