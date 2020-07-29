@@ -150,6 +150,11 @@ image add_image(image a, image b)
     return op_image(add, a, b);
 }
 
+float sub(float x, float y)
+{
+    return x - y;
+}
+
 image sub_image(image a, image b)
 {
     // TODO
