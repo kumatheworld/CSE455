@@ -139,6 +139,11 @@ image op_image(float (*op)(float, float), image a, image b)
     return im;
 }
 
+float add(float x, float y)
+{
+    return x + y;
+}
+
 image add_image(image a, image b)
 {
     // TODO
