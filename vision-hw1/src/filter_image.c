@@ -147,7 +147,7 @@ float add(float x, float y)
 image add_image(image a, image b)
 {
     // TODO
-    return make_image(1,1,1);
+    return op_image(add, a, b);
 }
 
 image sub_image(image a, image b)
