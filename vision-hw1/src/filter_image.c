@@ -184,7 +184,7 @@ void feature_normalize(image im)
         float z = im.data[idx];
         max = z < max ? max : z;
         min = z > min ? min : z;
-}
+    }
 
     const float scale = min < max ? 1 / (max - min) : 0;
     for (int idx = 0; idx < im_size; idx++) {
@@ -203,7 +203,27 @@ void feature_normalize(image im)
 image *sobel_image(image im)
 {
     // TODO
-    return calloc(2, sizeof(image));
+    float grad[3] = {-1, 0, 1};
+    float smooth[3] = {1, 2, 1};
+    image fx1 = make_filter_from_array(3, 1, grad);
+    image fx2 = make_filter_from_array(1, 3, smooth);
+    image fy1 = make_filter_from_array(3, 1, smooth);
+    image fy2 = make_filter_from_array(1, 3, grad);
+
+    image gx = convolve_image(convolve_image(im, fx1, 0), fx2, 0);
+    image gy = convolve_image(convolve_image(im, fy1, 0), fy2, 0);
+
+    image *res = calloc(2, sizeof(image));
+    res[0] = make_image(im.w, im.h, 1);
+    res[1] = make_image(im.w, im.h, 1);
+    for (int idx = 0; idx < im.w * im.h; idx++) {
+        float x = gx.data[idx];
+        float y = gy.data[idx];
+        res[0].data[idx] = hypot(x, y);
+        res[1].data[idx] = atan2(y, x);
+    }
+
+    return res;
 }
 
 image colorize_sobel(image im)
