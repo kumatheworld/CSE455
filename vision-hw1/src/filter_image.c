@@ -229,5 +229,21 @@ image *sobel_image(image im)
 image colorize_sobel(image im)
 {
     // TODO
-    return make_image(1,1,1);
+    image *res = sobel_image(im);
+    image mag = res[0];
+    image theta = res[1];
+    feature_normalize(mag);
+    feature_normalize(theta);
+
+    image im_new = make_image(im.w, im.h, 3);
+    const int im_size = im.w * im.h;
+    for (int idx = 0; idx < im_size; idx ++) {
+        im_new.data[idx] = theta.data[idx];
+        im_new.data[idx + im_size] = mag.data[idx];
+        im_new.data[idx + 2 * im_size] = mag.data[idx];
+    }
+    clamp_image(im_new);
+    hsv_to_rgb(im_new);
+
+    return im_new;
 }
