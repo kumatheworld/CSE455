@@ -10,3 +10,10 @@ im_low = convolve_image(im_low, f_low, 1)
 im = add_image(im_high, im_low)
 clamp_image(im)
 save_image(im, "ronbledore")
+
+# Make a colorized representation
+im = load_image("data/dog.jpg")
+im_sobel = colorize_sobel(im)
+f = make_gaussian_filter(1)
+im_sobel_smooth = convolve_image(im_sobel, f, 1)
+save_image(im_sobel_smooth, "sobel")
