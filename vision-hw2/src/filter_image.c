@@ -228,6 +228,9 @@ image *sobel_image(image im)
         res[1].data[idx] = atan2(y, x);
     }
 
+    free_image(gx);
+    free_image(gy);
+
     return res;
 }
 
