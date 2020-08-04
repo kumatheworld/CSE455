@@ -81,6 +81,7 @@ image make_gy_filter();
 void feature_normalize(image im);
 void l1_normalize(image im);
 void threshold_image(image im, float thresh);
+image apply_sobel(image im, int x);
 image *sobel_image(image im);
 image colorize_sobel(image im);
 image smooth_image(image im, float sigma);
