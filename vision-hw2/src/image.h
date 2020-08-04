@@ -70,6 +70,7 @@ image bilinear_resize(image im, int w, int h);
 
 // Filtering
 image convolve_image(image im, image filter, int preserve);
+image make_filter_from_array(int w, int h, float a[]);
 image make_box_filter(int w);
 image make_highpass_filter();
 image make_sharpen_filter();

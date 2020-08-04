@@ -64,7 +64,8 @@ image convolve_image(image im, image filter, int preserve)
     return im_new;
 }
 
-image make_filter_from_array(int w, int h, float a[]) {
+image make_filter_from_array(int w, int h, float a[])
+{
     image filter = make_image(w, h, 1);
     for (int idx = 0; idx < w * h; idx++) {
         filter.data[idx] = a[idx];
