@@ -253,5 +253,8 @@ image colorize_sobel(image im)
     clamp_image(im_new);
     hsv_to_rgb(im_new);
 
+    free_image(mag);
+    free_image(theta);
+
     return im_new;
 }
