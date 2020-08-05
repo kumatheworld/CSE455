@@ -112,8 +112,25 @@ image smooth_image(image im, float sigma)
 //          third channel is IxIy.
 image structure_matrix(image im, float sigma)
 {
-    image S = make_image(im.w, im.h, 3);
     // TODO: calculate structure matrix for im.
+    image Ix = apply_sobel(im, 1);
+    image Iy = apply_sobel(im, 0);
+
+    const im_size = im.w * im.h;
+    image I2 = make_image(im.w, im.h, 3);
+    for (int idx = 0; idx < im_size; idx++) {
+        float x = Ix.data[idx];
+        float y = Iy.data[idx];
+        I2.data[idx] = x * x;
+        I2.data[idx + im_size] = y * y;
+        I2.data[idx + 2 * im_size] = x * y;
+    }
+    free_image(Ix);
+    free_image(Iy);
+
+    image S = smooth_image(I2, sigma);
+    free_image(I2);
+
     return S;
 }
 
@@ -165,7 +182,7 @@ descriptor *harris_corner_detector(image im, float sigma, float thresh, int nms,
     //TODO: count number of responses over threshold
     int count = 1; // change this
 
-    
+
     *n = count; // <- set *n equal to number of corners in image.
     descriptor *d = calloc(count, sizeof(descriptor));
     //TODO: fill in array *d with descriptors of corners, use describe_index.
