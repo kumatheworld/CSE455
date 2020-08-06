@@ -192,6 +192,23 @@ image nms_image(image im, int w)
     //     for neighbors within w:
     //         if neighbor response greater than pixel response:
     //             set response to be very low (I use -999999 [why not 0??])
+    const float very_low = -999999;
+    for (int y = 0; y < im.h; y++) {
+        for (int x = 0; x < im.w; x++) {
+            float maximum = __FLT_MIN__;
+            for (int y_ = y - w; y_ <= y + w; y_++) {
+                for (int x_ = x - w; x_ <= x + w; x_++) {
+                    float val = get_pixel(im, x_, y_, 0);
+                    if (maximum < val) {
+                        maximum = val;
+                    }
+                }
+            }
+            if (get_pixel(im, x, y, 0) < maximum) {
+                set_pixel(r, x, y, 0, very_low);
+            }
+        }
+    }
     return r;
 }
 
