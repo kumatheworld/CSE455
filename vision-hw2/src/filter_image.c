@@ -206,11 +206,13 @@ image apply_sobel(image im, int x)
     float grad[3] = {-1, 0, 1};
     float smooth[3] = {1, 2, 1};
     image f1 = make_filter_from_array(3, 1, x ? grad : smooth);
-    image f2 = make_filter_from_array(1, 3, x ? smooth : grad);
-    image g = convolve_image(convolve_image(im, f1, 0), f2, 0);
+    image g1 = convolve_image(im, f1, 0);
     free_image(f1);
+    image f2 = make_filter_from_array(1, 3, x ? smooth : grad);
+    image g2 = convolve_image(g1, f2, 0);
     free_image(f2);
-    return g;
+    free_image(g1);
+    return g2;
 }
 
 image *sobel_image(image im)
