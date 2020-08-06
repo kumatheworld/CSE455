@@ -110,7 +110,7 @@ image make_1d_gaussian(float sigma, int x)
 // returns: smoothed image.
 image smooth_image(image im, float sigma)
 {
-    if(1){
+    if (0) {
         image g = make_gaussian_filter(sigma);
         image s = convolve_image(im, g, 1);
         free_image(g);
@@ -118,7 +118,14 @@ image smooth_image(image im, float sigma)
     } else {
         // TODO: optional, use two convolutions with 1d gaussian filter.
         // If you implement, disable the above if check.
-        return copy_image(im);
+        image g1 = make_1d_gaussian(sigma, 1);
+        image s1 = convolve_image(im, g1, 1);
+        free_image(g1);
+        image g2 = make_1d_gaussian(sigma, 0);
+        image s2 = convolve_image(s1, g2, 1);
+        free_image(g2);
+        free_image(s1);
+        return s2;
     }
 }
 
