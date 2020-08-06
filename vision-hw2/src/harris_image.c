@@ -81,10 +81,27 @@ void mark_corners(image im, descriptor *d, int n)
 // Creates a 1d Gaussian filter.
 // float sigma: standard deviation of Gaussian.
 // returns: single row image of the filter.
-image make_1d_gaussian(float sigma)
+image make_1d_gaussian(float sigma, int x)
 {
     // TODO: optional, make separable 1d Gaussian.
-    return make_image(1,1,1);
+    const int l = (6 * sigma + 1) / 2;
+    const int w = 2 * l + 1;
+    const float neg_inv_2sigma2 = -1 / (2 * sigma * sigma);
+
+    image filter;
+    if (x) {
+        filter = make_image(1, w, 1);
+    } else {
+        filter = make_image(w, 1, 1);
+    }
+    int idx = 0;
+    for (int x = -l; x <= l; x++) {
+        int x2 = x * x;
+        filter.data[idx++] = exp(x2 * neg_inv_2sigma2);
+    }
+
+    l1_normalize(filter);
+    return filter;
 }
 
 // Smooths an image using separable Gaussian filter.
