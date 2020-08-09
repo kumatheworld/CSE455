@@ -167,6 +167,17 @@ match *match_descriptors(descriptor *a, int an, descriptor *b, int bn, int *mn)
     // Each point should only be a part of one match.
     // Some points will not be in a match.
     // In practice just bring good matches to front of list, set *mn.
+    qsort(m, an, sizeof(match), match_compare);
+    for (j = 0; j < an; j++) {
+        i = m[j].bi;
+        if (seen[i]) {
+            m[j].distance = __FLT_MAX__;
+        } else {
+            seen[i] = 1;
+            count++;
+        }
+    }
+    qsort(m, an, sizeof(match), match_compare);
     *mn = count;
     free(seen);
     return m;
