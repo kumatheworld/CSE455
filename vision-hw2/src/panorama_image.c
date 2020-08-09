@@ -63,8 +63,8 @@ image draw_matches(image a, image b, match *matches, int n, int inliers)
     image both = both_images(a, b);
     int i,j;
     for(i = 0; i < n; ++i){
-        int bx = matches[i].p.x; 
-        int ex = matches[i].q.x; 
+        int bx = matches[i].p.x;
+        int ex = matches[i].q.x;
         int by = matches[i].p.y;
         int ey = matches[i].q.y;
         for(j = bx; j < ex + a.w; ++j){
@@ -118,7 +118,12 @@ image find_and_draw_matches(image a, image b, float sigma, float thresh, int nms
 float l1_distance(float *a, float *b, int n)
 {
     // TODO: return the correct number.
-    return 0;
+    float sum = 0;
+    for (int i = 0; i < n; i++) {
+        float d = b[i] - a[i];
+        sum += d < 0 ? -d : d;
+    }
+    return sum;
 }
 
 // Finds best matches between descriptors of two images.
@@ -227,7 +232,7 @@ matrix compute_homography(match *matches, int n)
 
     }
     matrix a = solve_system(M, b);
-    free_matrix(M); free_matrix(b); 
+    free_matrix(M); free_matrix(b);
 
     // If a solution can't be found, return empty matrix;
     matrix none = {0};
@@ -302,7 +307,7 @@ image combine_images(image a, image b, matrix H)
 
     int i,j,k;
     image c = make_image(w, h, a.c);
-    
+
     // Paste image a into the new image offset by dx and dy.
     for(k = 0; k < a.c; ++k){
         for(j = 0; j < a.h; ++j){
@@ -335,7 +340,7 @@ image panorama_image(image a, image b, float sigma, float thresh, int nms, float
     int an = 0;
     int bn = 0;
     int mn = 0;
-    
+
     // Calculate corners and descriptors
     descriptor *ad = harris_corner_detector(a, sigma, thresh, nms, &an);
     descriptor *bd = harris_corner_detector(b, sigma, thresh, nms, &bn);
