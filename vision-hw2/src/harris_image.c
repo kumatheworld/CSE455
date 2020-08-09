@@ -140,7 +140,7 @@ image structure_matrix(image im, float sigma)
     image Ix = apply_sobel(im, 1);
     image Iy = apply_sobel(im, 0);
 
-    const im_size = im.w * im.h;
+    const int im_size = im.w * im.h;
     image I2 = make_image(im.w, im.h, 3);
     for (int idx = 0; idx < im_size; idx++) {
         float x = Ix.data[idx];
