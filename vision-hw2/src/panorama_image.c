@@ -143,11 +143,20 @@ match *match_descriptors(descriptor *a, int an, descriptor *b, int bn, int *mn)
         // TODO: for every descriptor in a, find best match in b.
         // record ai as the index in *a and bi as the index in *b.
         int bind = 0; // <- find the best match
+        float d_min = __FLT_MAX__;
+        for (i = 0; i < bn; i++) {
+            float d = l1_distance(a[j].data, b[i].data, a[j].n);
+            if (d_min > d) {
+                d_min = d;
+                bind = i;
+            }
+        }
+
         m[j].ai = j;
         m[j].bi = bind; // <- should be index in b.
         m[j].p = a[j].p;
         m[j].q = b[bind].p;
-        m[j].distance = 0; // <- should be the smallest L1 distance!
+        m[j].distance = d_min; // <- should be the smallest L1 distance!
     }
 
     int count = 0;
