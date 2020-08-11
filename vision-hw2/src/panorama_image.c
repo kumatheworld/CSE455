@@ -324,7 +324,6 @@ matrix RANSAC(match *m, int n, float thresh, int k, int cutoff)
         randomize_matches(m, n);
         matrix H = compute_homography(m, e);
         int count = model_inliers(H, m, n, thresh);
-        printf("%d %d\n", count, best);
         if (best < count) {
             best = count;
             Hb = compute_homography(m, best);
