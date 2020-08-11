@@ -228,6 +228,14 @@ int model_inliers(matrix H, match *m, int n, float thresh)
     // TODO: count number of matches that are inliers
     // i.e. distance(H*p, q) < thresh
     // Also, sort the matches m so the inliers are the first 'count' elements.
+    for (i = 0; i < n; i++) {
+        float d = point_distance(project_point(H, m[i].p), m[i].q);
+        m[i].distance = d; // not very cool... but will work
+        if (d < thresh) {
+            count++;
+        }
+    }
+    qsort(m, n, sizeof(match), match_compare);
     return count;
 }
 
