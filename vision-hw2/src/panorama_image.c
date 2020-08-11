@@ -209,7 +209,7 @@ point project_point(matrix H, point p)
 float point_distance(point p, point q)
 {
     // TODO: should be a quick one.
-    return 0;
+    return hypotf(q.x - p.x, q.y - p.y);
 }
 
 // Count number of inliers in a set of matches. Should also bring inliers
