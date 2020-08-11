@@ -245,6 +245,13 @@ int model_inliers(matrix H, match *m, int n, float thresh)
 void randomize_matches(match *m, int n)
 {
     // TODO: implement Fisher-Yates to shuffle the array.
+    for (int i = n - 1; i > 0; i--) {
+        int j = rand() % (i + 1);
+        match c;
+        c = m[i];
+        m[i] = m[j];
+        m[j] = c;
+    }
 }
 
 // Computes homography between two images given matching pixels.
