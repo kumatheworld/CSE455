@@ -307,7 +307,7 @@ matrix compute_homography(match *matches, int n)
 // returns: matrix representing most common homography between matches.
 matrix RANSAC(match *m, int n, float thresh, int k, int cutoff)
 {
-    int e;
+    int e = 4;
     int best = 0;
     matrix Hb = make_translation_homography(256, 0);
     // TODO: fill in RANSAC algorithm.
@@ -320,6 +320,19 @@ matrix RANSAC(match *m, int n, float thresh, int k, int cutoff)
     //         if it's better than the cutoff:
     //             return it immediately
     // if we get to the end return the best homography
+    for (int i = 0; i < k; i++) {
+        randomize_matches(m, n);
+        matrix H = compute_homography(m, e);
+        int count = model_inliers(H, m, n, thresh);
+        printf("%d %d\n", count, best);
+        if (best < count) {
+            best = count;
+            Hb = compute_homography(m, best);
+        }
+        if (best > cutoff) {
+            return Hb;
+        }
+    }
     return Hb;
 }
 
