@@ -193,7 +193,13 @@ point project_point(matrix H, point p)
     // TODO: project point p with homography H.
     // Remember that homogeneous coordinates are equivalent up to scalar.
     // Have to divide by.... something...
-    point q = make_point(0, 0);
+    c.data[0][0] = p.x;
+    c.data[1][0] = p.y;
+    c.data[2][0] = 1;
+    matrix Q = matrix_mult_matrix(H, c);
+    point q;
+    q.x = Q.data[0][0] / Q.data[2][0];
+    q.y = Q.data[1][0] / Q.data[2][0];
     return q;
 }
 
