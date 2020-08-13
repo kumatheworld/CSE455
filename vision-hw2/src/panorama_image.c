@@ -120,8 +120,7 @@ float l1_distance(float *a, float *b, int n)
     // TODO: return the correct number.
     float sum = 0;
     for (int i = 0; i < n; i++) {
-        float d = b[i] - a[i];
-        sum += d < 0 ? -d : d;
+        sum += fabsf(b[i] - a[i]);
     }
     return sum;
 }
