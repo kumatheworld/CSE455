@@ -177,14 +177,11 @@ match *match_descriptors(descriptor *a, int an, descriptor *b, int bn, int *mn)
     qsort(m, an, sizeof(match), match_compare);
     for (j = 0; j < an; j++) {
         i = m[j].bi;
-        if (seen[i]) {
-            m[j].distance = __FLT_MAX__;
-        } else {
+        if (!seen[i]) {
             seen[i] = 1;
-            count++;
+            swap_match(m, count++, j);
         }
     }
-    qsort(m, an, sizeof(match), match_compare);
     *mn = count;
     free(seen);
     return m;
