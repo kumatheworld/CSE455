@@ -125,6 +125,14 @@ float l1_distance(float *a, float *b, int n)
     return sum;
 }
 
+void swap_match(match *m, int i, int j)
+{
+    match c;
+    c = m[i];
+    m[i] = m[j];
+    m[j] = c;
+}
+
 // Finds best matches between descriptors of two images.
 // descriptor *a, *b: array of descriptors for pixels in two images.
 // int an, bn: number of descriptors in arrays a and b.
