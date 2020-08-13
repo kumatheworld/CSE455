@@ -272,13 +272,10 @@ matrix compute_homography(match *matches, int n)
         double y  = matches[i].p.y;
         double yp = matches[i].q.y;
         // TODO: fill in the matrices M and b.
-        float M_rows[16] = {
-            x, y, 1, 0, 0, 0, -x*xp, -y*xp,
-            0, 0, 0, x, y, 1, -x*yp, -y*yp
-        };
-        for (int j = 0; j < 16; j++) {
-            M.data[2*i+j/8][j%8] = M_rows[j];
-        }
+        double row0[8] = {x, y, 1, 0, 0, 0, -x*xp, -y*xp};
+        double row1[8] = {0, 0, 0, x, y, 1, -x*yp, -y*yp};
+        memcpy(*(M.data+2*i), row0, sizeof(row0));
+        memcpy(*(M.data+2*i+1), row1, sizeof(row1));
         b.data[2*i][0] = xp;
         b.data[2*i+1][0] = yp;
     }
