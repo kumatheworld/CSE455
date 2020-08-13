@@ -428,7 +428,7 @@ image panorama_image(image a, image b, float sigma, float thresh, int nms, float
     // Run RANSAC to find the homography
     matrix H = RANSAC(m, mn, inlier_thresh, iters, cutoff);
 
-    if(1){
+    if (0) {
         // Mark corners and matches between images
         mark_corners(a, ad, an);
         mark_corners(b, bd, bn);
@@ -452,6 +452,29 @@ image panorama_image(image a, image b, float sigma, float thresh, int nms, float
 image cylindrical_project(image im, float f)
 {
     //TODO: project image onto a cylinder
-    image c = copy_image(im);
+    const float xc = 0.5 * im.w;
+    const float yc = 0.5 * im.h;
+    const float r_0 = 1 - f / hypotf(f, xc);
+    const int x_0 = r_0 * xc;
+    const int y_0 = r_0 * yc;
+
+    image c = make_image(im.w - 2 * x_0, im.h - 2 * y_0, im.c);
+    for (int y_ = 0; y_ < c.h; y_++) {
+        for (int x_ = 0; x_ < c.w; x_++) {
+            float dx_ = x_ + x_0 - xc;
+            float dy_ = y_ + y_0 - yc;
+
+            float r = f / sqrt((f + dx_) * (f - dx_));
+            float x = r * dx_ + xc;
+            float y = r * dy_ + yc;
+
+            point p = make_point(x, y);
+            for (int k = 0; k < c.c; k++) {
+                float v = bilinear_interpolate(im, p.x, p.y, k);
+                set_pixel(c, x_, y_, k, v);
+            }
+        }
+    }
+
     return c;
 }
