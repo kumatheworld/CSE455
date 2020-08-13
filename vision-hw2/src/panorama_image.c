@@ -201,9 +201,10 @@ point project_point(matrix H, point p)
     c.data[1][0] = p.y;
     c.data[2][0] = 1;
     matrix Q = matrix_mult_matrix(H, c);
-    point q;
-    q.x = Q.data[0][0] / Q.data[2][0];
-    q.y = Q.data[1][0] / Q.data[2][0];
+    point q = make_point(
+        Q.data[0][0] / Q.data[2][0],
+        Q.data[1][0] / Q.data[2][0]
+    );
     return q;
 }
 
