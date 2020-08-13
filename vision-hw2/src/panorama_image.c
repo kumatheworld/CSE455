@@ -205,6 +205,8 @@ point project_point(matrix H, point p)
         Q.data[0][0] / Q.data[2][0],
         Q.data[1][0] / Q.data[2][0]
     );
+    free_matrix(c);
+    free_matrix(Q);
     return q;
 }
 
