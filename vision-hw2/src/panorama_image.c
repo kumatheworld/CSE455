@@ -388,13 +388,13 @@ image combine_images(image a, image b, matrix H)
     // and see if their projection from a coordinates to b coordinates falls
     // inside of the bounds of image b. If so, use bilinear interpolation to
     // estimate the value of b at that projection, then fill in image c.
-    for(j = 0; j < h; ++j){
-        for(i = 0; i < w; ++i){
-            point p = project_point(H, make_point(i + dx, j + dy));
-            if (0 <= p.x && p.x < b.w && 0 <= p.y && p.y < b.h) {
-                for(k = 0; k < c.c; ++k){
+    for (j = topleft.y; j < botright.y; ++j) {
+        for (i = topleft.x; i < botright.x; ++i) {
+            point p = project_point(H, make_point(i, j));
+            if (0 <= p.x && p.x < b.w - 1 && 0 <= p.y && p.y < b.h - 1) {
+                for(k = 0; k < c.c; ++k) {
                     float v = bilinear_interpolate(b, p.x, p.y, k);
-                    set_pixel(c, i, j, k, v);
+                    set_pixel(c, i - dx, j - dy, k, v);
                 }
             }
         }
