@@ -42,6 +42,7 @@ typedef struct{
 } match;
 
 // Basic operations
+int serialize_index(image im, int x, int y, int c);
 float get_pixel(image im, int x, int y, int c);
 void set_pixel(image im, int x, int y, int c, float v);
 image copy_image(image im);
@@ -72,6 +73,7 @@ image bilinear_resize(image im, int w, int h);
 
 // Filtering
 image convolve_image(image im, image filter, int preserve);
+image make_filter_from_array(int w, int h, float a[]);
 image make_box_filter(int w);
 image make_highpass_filter();
 image make_sharpen_filter();
@@ -82,6 +84,7 @@ image make_gy_filter();
 void feature_normalize(image im);
 void l1_normalize(image im);
 void threshold_image(image im, float thresh);
+image apply_sobel(image im, int x);
 image *sobel_image(image im);
 image colorize_sobel(image im);
 image smooth_image(image im, float sigma);
