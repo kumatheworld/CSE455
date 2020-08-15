@@ -78,6 +78,21 @@ image box_filter_image(image im, int s)
     image integ = make_integral_image(im);
     image S = make_image(im.w, im.h, im.c);
     // TODO: fill in S using the integral image.
+    const int hs = (s - 1) / 2;
+    for (k = 0; k < im.c; k++) {
+        for (j = hs; j < im.h + hs; j++) {
+            for (i = hs; i < im.w + hs; i++) {
+                float v = (
+                    get_pixel(integ, i, j, k)
+                    - get_pixel(integ, i - s, j, k)
+                    - get_pixel(integ, i, j - s, k)
+                    + get_pixel(integ, i - s, j - s, k)
+                ) / (s * s);
+                set_pixel(S, i, j, k, v);
+            }
+        }
+    }
+
     return S;
 }
 
