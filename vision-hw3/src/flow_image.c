@@ -104,7 +104,6 @@ image box_filter_image(image im, int s)
 //          3rd channel is IxIy, 4th channel is IxIt, 5th channel is IyIt.
 image time_structure_matrix(image im, image prev, int s)
 {
-    int i;
     int converted = 0;
     if(im.c == 3){
         converted = 1;
@@ -113,9 +112,26 @@ image time_structure_matrix(image im, image prev, int s)
     }
 
     // TODO: calculate gradients, structure components, and smooth them
+    image Ix = apply_sobel(im, 1);
+    image Iy = apply_sobel(im, 0);
 
+    const int im_size = im.w * im.h;
+    image I2 = make_image(im.w, im.h, 5);
+    for (int idx = 0; idx < im_size; idx++) {
+        float x = Ix.data[idx];
+        float y = Iy.data[idx];
+        float t = prev.data[idx];
+        I2.data[idx] = x * x;
+        I2.data[idx + im_size] = y * y;
+        I2.data[idx + 2 * im_size] = x * y;
+        I2.data[idx + 3 * im_size] = x * t;
+        I2.data[idx + 4 * im_size] = y * t;
+    }
+    free_image(Ix);
+    free_image(Iy);
 
-
+    image S = box_filter_image(I2, s);
+    free_image(I2);
 
     if(converted){
         free_image(im); free_image(prev);
