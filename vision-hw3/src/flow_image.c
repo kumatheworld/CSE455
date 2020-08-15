@@ -159,6 +159,26 @@ image velocity_image(image S, int stride)
             float vx = 0;
             float vy = 0;
 
+            matrix M = make_matrix(2, 2);
+            M.data[0][0] = Ixx;
+            M.data[0][1] = Ixy;
+            M.data[1][0] = Ixy;
+            M.data[1][1] = Iyy;
+
+            matrix b = make_matrix(2, 1);
+            b.data[0][0] = -Ixt;
+            b.data[1][0] = -Iyt;
+
+            matrix a = solve_system(M, b);
+            if (a.data) {
+                vx = a.data[0][0];
+                vy = a.data[1][0];
+            }
+
+            free_matrix(M);
+            free_matrix(b);
+            free_matrix(a);
+
             set_pixel(v, i/stride, j/stride, 0, vx);
             set_pixel(v, i/stride, j/stride, 1, vy);
         }
