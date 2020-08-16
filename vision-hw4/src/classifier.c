@@ -79,7 +79,8 @@ matrix forward_layer(layer *l, matrix in)
 
 
     // TODO: fix this! multiply input by weights and apply activation function.
-    matrix out = make_matrix(in.rows, l->w.cols);
+    matrix out = matrix_mult_matrix(in, l->w);
+    activate_matrix(out, l->activation);
 
 
     free_matrix(l->out);// free the old output
