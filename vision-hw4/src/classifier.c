@@ -38,7 +38,7 @@ void activate_matrix(matrix m, ACTIVATION a)
     }
 }
 
-// Calculates the gradient of an activation function and multiplies it into
+// Calculates the gradient of a n activation function and multiplies it into
 // the delta for a layer
 // matrix m: an activated layer output
 // ACTIVATION a: activation function for a layer
@@ -50,6 +50,20 @@ void gradient_matrix(matrix m, ACTIVATION a, matrix d)
         for(j = 0; j < m.cols; ++j){
             double x = m.data[i][j];
             // TODO: multiply the correct element of d by the gradient
+            if(a == LOGISTIC){
+                // TODO
+                d.data[i][j] *= x * (1 - x);
+            } else if (a == RELU){
+                // TODO
+                if (x < 0) {
+                    m.data[i][j] = 0;
+                }
+            } else if (a == LRELU){
+                // TODO
+                if (x < 0) {
+                    m.data[i][j] *= -0.01;
+                }
+            }
         }
     }
 }
