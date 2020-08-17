@@ -55,6 +55,18 @@ print("test accuracy:     %f", accuracy_model(m, test))
 
 
 # 2.2.3 Try varying the parameter for weight decay to different powers of 10: (10^0, 10^-1, 10^-2, 10^-3, 10^-4, 10^-5). How does weight decay affect the final model training and test accuracy?
+# I got the following result.
+#
+#   weight decay | final loss | train acc. | test acc.
+# -----------------------------------------------------
+#           10^0 |     0.3371 |     0.8990 |    0.9049
+#          10^-1 |     0.2932 |     0.9031 |    0.9089
+#          10^-2 |     0.2896 |     0.9034 |    0.9092
+#          10^-3 |     0.2893 |     0.9034 |    0.9091
+#          10^-4 |     0.2893 |     0.9034 |    0.9091
+#          10^-5 |     0.2893 |     0.9034 |    0.9091
+#
+# Here lower weight decay tends to be better.
 
 
 # 2.3.1 Currently the model uses a logistic activation for the first layer. Try using a the different activation functions we programmed. How well do they perform? What's best?
