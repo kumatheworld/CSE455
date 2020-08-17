@@ -129,6 +129,17 @@ print("test accuracy:     %f", accuracy_model(m, test))
 
 
 # 2.3.4 Modify your model so it has 3 layers instead of two. The layers should be `inputs -> 64`, `64 -> 32`, and `32 -> outputs`. Also modify your model to train for 3000 iterations instead of 1000. Look at the training and testing error for different values of decay (powers of 10, 10^-4 -> 10^0). Which is best? Why?
+# I got the following result.
+#
+#   weight decay | final loss | train acc. | test acc.
+# -----------------------------------------------------
+#           10^0 |     0.7695 |     0.8258 |    0.8339
+#          10^-1 |     0.2723 |     0.9490 |    0.9495
+#          10^-2 |     0.1501 |     0.9728 |    0.9647
+#          10^-3 |     0.1458 |     0.9743 |    0.9652
+#          10^-4 |     0.1453 |     0.9743 |    0.9650
+#
+# Weight decay does not really help although the model is slightly overfitting this time. Maybe we need bigger models to get it to work.
 
 
 # 3.2.1 How well does your network perform on the CIFAR dataset?
