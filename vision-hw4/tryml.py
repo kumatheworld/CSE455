@@ -115,6 +115,17 @@ print("test accuracy:     %f", accuracy_model(m, test))
 
 
 # 2.3.3 Right now the regularization parameter `decay` is set to 0. Try adding some decay to your model. What happens, does it help? Why or why not may this be?
+# I got the following result.
+#
+#   weight decay | final loss | train acc. | test acc.
+# -----------------------------------------------------
+#           10^0 |     0.4784 |     0.8884 |    0.8936
+#          10^-1 |     0.2072 |     0.9359 |    0.9359
+#          10^-2 |     0.1747 |     0.9443 |    0.9434
+#          10^-3 |     0.1724 |     0.9448 |    0.9444
+#              0 |     0.1722 |     0.9449 |    0.9445
+#
+# Weight decay does not help. This is because our model is not very large. Indeed, testing accuracy is always as good as training accuracy, which means the model is rather underfitting.
 
 
 # 2.3.4 Modify your model so it has 3 layers instead of two. The layers should be `inputs -> 64`, `64 -> 32`, and `32 -> outputs`. Also modify your model to train for 3000 iterations instead of 1000. Look at the training and testing error for different values of decay (powers of 10, 10^-4 -> 10^0). Which is best? Why?
