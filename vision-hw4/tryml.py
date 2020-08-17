@@ -34,6 +34,7 @@ print("test accuracy:     %f", accuracy_model(m, test))
 
 
 ## Questions ##
+# NOTE: During the following experiments, the hyperparameters including activation functions are fixed to the default values unless they are explicitly mentioned in each question.
 
 # 2.2.1 Why might we be interested in both training accuracy and testing accuracy? What do these two numbers tell us about our current model?
 
