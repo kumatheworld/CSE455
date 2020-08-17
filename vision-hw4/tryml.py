@@ -37,6 +37,7 @@ print("test accuracy:     %f", accuracy_model(m, test))
 # NOTE: During the following experiments, the hyperparameters including activation functions are fixed to the default values unless they are explicitly mentioned in each question.
 
 # 2.2.1 Why might we be interested in both training accuracy and testing accuracy? What do these two numbers tell us about our current model?
+# Training accuracy tells us how well a model fits the training data. By looking at training accuracy, we can figure out how good a model can potentially be on the given task. On the other hand, testing accuracy tells us how well a model can perform on unseen data. In most cases we are interested in how good predictions our model can make on real world data, which tend to be unavailable during training time.
 
 
 # 2.2.2 Try varying the model parameter for learning rate to different powers of 10 (i.e. 10^1, 10^0, 10^-1, 10^-2, 10^-3) and training the model. What patterns do you see and how does the choice of learning rate affect both the loss during training and the final model accuracy?
