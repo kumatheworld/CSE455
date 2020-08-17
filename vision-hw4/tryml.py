@@ -143,5 +143,15 @@ print("test accuracy:     %f", accuracy_model(m, test))
 
 
 # 3.2.1 How well does your network perform on the CIFAR dataset?
-
+# We train the 2-layer network that we used in the previous question. I got the following result.
+#
+#  learning rate | final loss | train acc. | test acc.
+# -----------------------------------------------------
+#           10^0 |     2.3948 |     0.1757 |    0.1737
+#        3*10^-1 |     1.8402 |     0.3488 |    0.3475
+#          10^-1 |     1.6253 |     0.4484 |    0.4295
+#        3*10^-2 |     1.7344 |     0.4293 |    0.4201
+#          10^-2 |     1.8617 |     0.3744 |    0.3769
+#
+# It is best when learning rate is 10^-1. The testing accuracy then is about 43%.
 
