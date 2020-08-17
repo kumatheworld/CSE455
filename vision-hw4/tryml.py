@@ -82,6 +82,36 @@ print("test accuracy:     %f", accuracy_model(m, test))
 
 
 # 2.3.2 Using the same activation, find the best (power of 10) learning rate for your model. What is the training accuracy and testing accuracy?
+# I got the following result.
+#
+# ********************** LOGISTIC *********************
+#  learning rate | final loss | train acc. | test acc.
+# -----------------------------------------------------
+#           10^1 |     1.3944 |     0.4247 |    0.4248
+#           10^0 |     0.1501 |     0.9541 |    0.9485
+#          10^-1 |     0.1722 |     0.9449 |    0.9445
+#          10^-2 |     0.3917 |     0.8893 |    0.8949
+#
+# ************************ RELU ***********************
+#  learning rate | final loss | train acc. | test acc.
+# -----------------------------------------------------
+#           10^0 |        nan |     0.0992 |    0.1009
+#          10^-1 |     3.0858 |     0.4036 |    0.4035
+#          10^-2 |     0.2980 |     0.9131 |    0.9162
+#          10^-3 |     0.6582 |     0.8430 |    0.8518
+#
+# *********************** LRELU ***********************
+#  learning rate | final loss | train acc. | test acc.
+# -----------------------------------------------------
+#           10^0 |        nan |     0.0991 |    0.1009
+#          10^-1 |     0.4912 |     0.8578 |    0.8650
+#          10^-2 |     0.2985 |     0.9134 |    0.9164
+#          10^-3 |     0.6562 |     0.8441 |    0.8522
+#
+# For LOGISTIC, lr=1 seems the best. For RELU and LRELU, lr=0.01 seems the best.
+
+
+# NOTE: From here, we use LOGISTICS and set learning rate to 0.1.
 
 
 # 2.3.3 Right now the regularization parameter `decay` is set to 0. Try adding some decay to your model. What happens, does it help? Why or why not may this be?
