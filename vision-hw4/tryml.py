@@ -41,6 +41,17 @@ print("test accuracy:     %f", accuracy_model(m, test))
 
 
 # 2.2.2 Try varying the model parameter for learning rate to different powers of 10 (i.e. 10^1, 10^0, 10^-1, 10^-2, 10^-3) and training the model. What patterns do you see and how does the choice of learning rate affect both the loss during training and the final model accuracy?
+# I got the following result.
+#
+#  learning rate | final loss | train acc. | test acc.
+# -----------------------------------------------------
+#           10^1 |        nan |     0.0992 |    0.1009
+#           10^0 |     0.5915 |     0.8506 |    0.8463
+#          10^-1 |     0.2085 |     0.9207 |    0.9171
+#          10^-2 |     0.2893 |     0.9034 |    0.9091
+#          10^-3 |     0.5371 |     0.8590 |    0.8669
+#
+# Overall, testing accuracy is positively correlated with training accuracy and negatively correlated with final loss. When learning rate is too high, the loss value fluctuates a lot and does not become as low as it should be, sometimes ending up producing NaNs. On the other hand, when learning rate is too low, loss does not decrease as much. For our model, lr=10^-1 or 10^-2 seems the best.
 
 
 # 2.2.3 Try varying the parameter for weight decay to different powers of 10: (10^0, 10^-1, 10^-2, 10^-3, 10^-4, 10^-5). How does weight decay affect the final model training and test accuracy?
