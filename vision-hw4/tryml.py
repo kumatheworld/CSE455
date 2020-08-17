@@ -70,6 +70,15 @@ print("test accuracy:     %f", accuracy_model(m, test))
 
 
 # 2.3.1 Currently the model uses a logistic activation for the first layer. Try using a the different activation functions we programmed. How well do they perform? What's best?
+# I got the following result.
+#
+#     activation | final loss | train acc. | test acc.
+# -----------------------------------------------------
+#      LOSTISTIC |     0.3917 |     0.8893 |    0.8949
+#           RELU |     0.2980 |     0.9131 |    0.9162
+#          LRELU |     0.2985 |     0.9134 |    0.9164
+#
+# RELU and LRELU are significantly better than LOGISTIC for the fixed learning rate, whereas there seems no big difference between RELU and LRELU.
 
 
 # 2.3.2 Using the same activation, find the best (power of 10) learning rate for your model. What is the training accuracy and testing accuracy?
