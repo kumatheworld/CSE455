@@ -428,3 +428,6 @@ dmypy.json
 .pytype/
 
 # End of https://www.toptal.com/developers/gitignore/api/python,latex
+
+# CIFAR-10 data
+data/
