@@ -431,3 +431,6 @@ dmypy.json
 
 # CIFAR-10 data
 data/
+
+# Logs
+logs/
