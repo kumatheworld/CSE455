@@ -16,6 +16,9 @@ class BaseModel(nn.Module):
         st = datetime.datetime.fromtimestamp(ts).strftime('%Y-%m-%d_%H:%M:%S_log.txt')
         self.logFile = open('logs/' + st, 'w')
 
+        self.input_size = 3 * 32 * 32
+        self.output_size = 10
+
     def log(self, str):
         print(str)
         self.logFile.write(str + '\n')
@@ -30,7 +33,7 @@ class BaseModel(nn.Module):
         lr = args.lr  # TODO: Implement decreasing learning rate's rules
         for param_group in optimizer.param_groups:
             param_group['lr'] = lr
-       
+
 
 
 class LazyNet(BaseModel):
