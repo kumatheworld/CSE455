@@ -40,12 +40,14 @@ class LazyNet(BaseModel):
     def __init__(self):
         super(LazyNet, self).__init__()
         # TODO: Define model here
-        self.layer = nn.Linear(self.input_size, self.output_size)
+        self.layer = nn.Sequential(
+            nn.Flatten(),
+            nn.Linear(self.input_size, self.output_size)
+        )
 
     def forward(self, x):
         # TODO: Implement forward pass for LazyNet
-        x1 = x.view(-1, self.input_size)
-        y1 = self.layer(x1)
+        y1 = self.layer(x)
         return y1
 
 
