@@ -1,7 +1,7 @@
 import matplotlib.pyplot as plt
 import pdb
 import argparse
-
+import os.path
 
 def argParser():
 	parser = argparse.ArgumentParser(description='PyTorch Plot Progress')
@@ -23,11 +23,17 @@ def main():
 			elif 'Test Accuracy of the network' in line:
 				test_accuracy.append(float(line[:-1].split(' ')[-2]))
 
-	
+	figures_dir = 'report/figures'
+	log_id = os.path.splitext(os.path.basename(args.file_name))[0]
+
 	plt.plot(train_accuracy, label='train')
 	plt.plot(test_accuracy, label='test')
+	plt.legend()
+	plt.savefig(os.path.join(figures_dir, f'accuracies_{log_id}.png'))
+
+	plt.clf()
 	plt.plot(train_loss)
-	plt.show()
+	plt.savefig(os.path.join(figures_dir, f'loss_{log_id}.png'))
 
 
 
