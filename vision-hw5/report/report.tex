@@ -1,6 +1,10 @@
 \documentclass[12pt]{article}
 \usepackage[margin=1in]{geometry}
 \usepackage{enumitem}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{graphicx}
+\graphicspath{{figures/}}
 
 \title{
   \vspace{-2cm}
@@ -16,6 +20,24 @@ Done!
 
 \section{Find the best network}
 \subsection{Training a classifier using only one fully connected Layer}
+See Figure~\ref{fig:2_1}. We can say that the the model successfully trained since the loss is decreasing throughout the training process and there is a healthy gap between the training accuracy and testing accuracy.
+\begin{figure}
+  \centering
+  \begin{subfigure}{.5\textwidth}
+    \centering
+    \includegraphics[width=.8\linewidth]{accuracies_2_1.png}
+    \caption{Accuracy}
+    \label{fig:2_1_sub1}
+  \end{subfigure}%
+  \begin{subfigure}{.5\textwidth}
+    \centering
+    \includegraphics[width=.8\linewidth]{loss_2_1.png}
+    \caption{Training loss}
+    \label{fig:2_1_sub2}
+  \end{subfigure}
+  \caption{Training result of LazyNet}
+  \label{fig:2_1}
+\end{figure}
 
 \subsection{Training a classifier using multiple fully connected Layers}
 \subsubsection{Question}
