@@ -55,6 +55,15 @@ class BoringNet(BaseModel):
     def __init__(self):
         super(BoringNet, self).__init__()
         # TODO: Define model here
+        self.hidden_sizes = [120, 84]
+        self.layers = nn.Sequential(
+            nn.Flatten(),
+            nn.Linear(self.input_size, self.hidden_sizes[0]),
+            nn.ReLU(inplace=True),
+            nn.Linear(self.hidden_sizes[0], self.hidden_sizes[1]),
+            nn.ReLU(inplace=True),
+            nn.Linear(self.hidden_sizes[1], self.output_size)
+        )
 
     def forward(self, x):
         # TODO: Implement forward pass for BoringNet
