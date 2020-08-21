@@ -67,7 +67,8 @@ class BoringNet(BaseModel):
 
     def forward(self, x):
         # TODO: Implement forward pass for BoringNet
-        return x
+        y = self.layers(x)
+        return y
 
 
 class CoolNet(BaseModel):
