@@ -4,6 +4,7 @@
 \usepackage{caption}
 \usepackage[subrefformat=parens,labelformat=parens]{subcaption}
 \usepackage{graphicx}
+\usepackage{cite}
 \graphicspath{{figures/}}
 
 \title{
@@ -28,6 +29,10 @@ See Figure~\ref{fig:2_2}. The training is not successful because the testing acc
 \subsubsection{Question}
 See Figure~\ref{fig:2_2_1}. The model accuracy is significantly worse than the previous model. This is because the model is expressively limited since it has less non-linearity. The model can actually become just as good as LazyNet since without activations, the forward pass is just a couple of matrix multiplications, which is nothing but a single matrix multiplication by the composed matrices. But somehow, by separating the weight update process in back propagation, it achieves a slightly higher accuracy than LazyNet.
 
+\subsection{Training a classifier using convolutions}
+Our CoolNet is based on LeNet~\cite{Lecun98gradient-basedlearning}. In addition, batch normalization~\cite{pmlr-v37-ioffe15} is performed after each convolutional layer and linear layer except the final layer in order to get the network to converge faster. As a result, the network got higher accuracy then the previous models. See Figure~\ref{fig:2_3_bs4} for the training result.
+\subsubsection{Question}
+
 \begin{figure}
   \begin{subfigure}{0.16\textwidth}
     \centering
@@ -40,6 +45,10 @@ See Figure~\ref{fig:2_2_1}. The model accuracy is significantly worse than the p
   \begin{subfigure}{0.16\textwidth}
     \centering
     \includegraphics[width=\linewidth]{accuracies_2_2_1.png}
+  \end{subfigure}
+  \begin{subfigure}{0.16\textwidth}
+    \centering
+    \includegraphics[width=\linewidth]{accuracies_2_3_bs4.png}
   \end{subfigure}
 
   \begin{subfigure}{0.16\textwidth}
@@ -60,12 +69,15 @@ See Figure~\ref{fig:2_2_1}. The model accuracy is significantly worse than the p
     \caption{}
     \label{fig:2_2_1}
   \end{subfigure}
-  \caption{Training results of LazyNet and BoringNet: \subref{fig:2_1} LazyNet, \subref{fig:2_2} BoringNet, \subref{fig:2_2_1} BoringNet without activations.}
+  \begin{subfigure}{0.16\textwidth}
+    \centering
+    \includegraphics[width=\linewidth]{loss_2_3_bs4.png}
+    \caption{}
+    \label{fig:2_3_bs4}
+  \end{subfigure}
+  \caption{Training results of LazyNet, BoringNet and CoolNet: \subref{fig:2_1} LazyNet, \subref{fig:2_2} BoringNet, \subref{fig:2_2_1} BoringNet without activations, \subref{fig:2_3_bs4} CoolNet with batch size 4.}
   \label{fig:images}
 \end{figure}
-
-\subsection{Training a classifier using convolutions}
-\subsubsection{Question}
 
 \section{How does learning rate work?}
 
@@ -73,4 +85,6 @@ See Figure~\ref{fig:2_2_1}. The model accuracy is significantly worse than the p
 
 \section{Change the loss function}
 
+\bibliography{report}
+\bibliographystyle{plain}
 \end{document}
