@@ -96,4 +96,5 @@ class CoolNet(BaseModel):
 
     def forward(self, x):
         # TODO: Implement forward pass for CoolNet
-        return x
+        y = self.layers(x)
+        return y
