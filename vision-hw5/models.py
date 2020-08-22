@@ -75,6 +75,24 @@ class CoolNet(BaseModel):
     def __init__(self):
         super(CoolNet, self).__init__()
         # TODO: Define model here
+        self.channel_sizes = [32, 64]
+        self.feature_size = 32 // 4 - 3
+        self.hidden_size = 128
+        self.layers = nn.Sequential(
+            nn.Conv2d(3, self.channel_sizes[0], 5),
+            nn.BatchNorm2d(self.channel_sizes[0]),
+            nn.ReLU(inplace=True),
+            nn.MaxPool2d(2, 2),
+            nn.Conv2d(self.channel_sizes[0], self.channel_sizes[1], 5),
+            nn.BatchNorm2d(self.channel_sizes[1]),
+            nn.ReLU(inplace=True),
+            nn.MaxPool2d(2, 2),
+            nn.Flatten(),
+            nn.Linear(self.channel_sizes[1] * self.feature_size * self.feature_size, self.hidden_size),
+            nn.BatchNorm1d(self.hidden_size),
+            nn.ReLU(inplace=True),
+            nn.Linear(self.hidden_size, self.output_size)
+        )
 
     def forward(self, x):
         # TODO: Implement forward pass for CoolNet
