@@ -28,11 +28,13 @@ def main():
 
 	plt.plot(train_accuracy, label='train')
 	plt.plot(test_accuracy, label='test')
+	plt.ylim(0, 100)
 	plt.legend()
 	plt.savefig(os.path.join(figures_dir, f'accuracies_{log_id}.png'))
 
 	plt.clf()
 	plt.plot(train_loss)
+	plt.ylim(0, 2.3)
 	plt.savefig(os.path.join(figures_dir, f'loss_{log_id}.png'))
 
 
