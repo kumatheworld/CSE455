@@ -103,6 +103,8 @@ We tried batch sizes of 4, 32 and 256. See Figure~\ref{fig:2_3_bs4}, Figure~\ref
 \section{How does learning rate work?}
 See Figure~\ref{fig:3_lr1e2} through \ref{fig:3_lr1e-4}. The model with learning rate 0.01 (Figure~\ref{fig:3_lr1e-2}) performs best. since its validation accuracy is the highest. Its training loss is the lowest too.
 
+Figure~\ref{fig:3_e150} shows the training result of the model trained for 150 epochs. The training accuracy is better than the 50-epoch model (Figure~\ref{fig:3_lr1e-2}) but the testing accuracy is just as good. This is because the model is overfitting at an early stage of training, in which case training longer will not help.
+
 \begin{figure}
   \begin{subfigure}{0.19\textwidth}
     \centering
@@ -119,6 +121,10 @@ See Figure~\ref{fig:3_lr1e2} through \ref{fig:3_lr1e-4}. The model with learning
   \begin{subfigure}{0.19\textwidth}
     \centering
     \includegraphics[width=\linewidth]{accuracies_3_lr1e-4.png}
+  \end{subfigure}
+  \begin{subfigure}{0.19\textwidth}
+    \centering
+    \includegraphics[width=\linewidth]{accuracies_3_e150.png}
   \end{subfigure}
 
   \begin{subfigure}{0.19\textwidth}
@@ -145,7 +151,13 @@ See Figure~\ref{fig:3_lr1e2} through \ref{fig:3_lr1e-4}. The model with learning
     \caption{}
     \label{fig:3_lr1e-4}
   \end{subfigure}
-  \caption{Training results of CoolNet. \subref{fig:3_lr1e2} lr=10, \subref{fig:3_lr1e-1} lr=0.1, \subref{fig:3_lr1e-2} lr=0.01 (same as \ref{fig:2_3_bs4}), \subref{fig:3_lr1e-4} lr=0.0001. For \subref{fig:3_lr1e2}, the training loss was as high as 4.1 throughout the training process, which is so high that it does not show up in the figure.}
+  \begin{subfigure}{0.19\textwidth}
+    \centering
+    \includegraphics[width=\linewidth]{loss_3_e150.png}
+    \caption{}
+    \label{fig:3_e150}
+  \end{subfigure}
+  \caption{Training results of CoolNet. \subref{fig:3_lr1e2} lr=10, \subref{fig:3_lr1e-1} lr=0.1, \subref{fig:3_lr1e-2} lr=0.01 (same as \ref{fig:2_3_bs4}), \subref{fig:3_lr1e-4} lr=0.0001, \subref{fig:3_e150} epoch=150. For \subref{fig:3_lr1e2}, the training loss was as high as 4.1 throughout the training process, which is so high that it does not show up in the figure.}
   \label{fig:3}
 \end{figure}
 
