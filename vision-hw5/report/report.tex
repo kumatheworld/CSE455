@@ -33,7 +33,7 @@ See Figure~\ref{fig:2_2_1}. The model accuracy is significantly worse than the p
 Our CoolNet is based on LeNet~\cite{Lecun98gradient-basedlearning}. In addition, batch normalization~\cite{pmlr-v37-ioffe15} is performed after each convolutional layer and linear layer except the final layer in order to get the network to converge faster. As a result, the network got higher accuracy then the previous models. See Figure~\ref{fig:2_3_bs4} for the training result.
 
 \subsubsection{Question}
-We tried batch sizes of 4, 32 and 256. See Figure~\ref{fig:2_3_bs4}, Figure~\ref{fig:2_3_bs32}, and Figure~\ref{fig:2_3_bs256} respectively. The loss curves account for the difference. Batch size 4 is so small to compute gradients accurately that the loss does not decrease sufficiently. On the other hand, when the batch size is 256, the total iteration number is much smaller and the training loss did not saturate. Among these 3 models, the model trained with batch size 32 performed best.
+We tried batch sizes of 4, 32 and 256. See Figure~\ref{fig:2_3_bs4}, Figure~\ref{fig:2_3_bs32}, and Figure~\ref{fig:2_3_bs256} respectively. The loss curves account for the difference. Batch size 4 is so small to compute gradients accurately that the loss does not decrease sufficiently. On the other hand, when the batch size is 256, the total iteration number is much smaller and the training loss does not saturate. Among these 3 models, the model trained with batch size 32 performs best.
 \begin{figure}
   \begin{subfigure}{0.16\textwidth}
     \centering
@@ -97,10 +97,57 @@ We tried batch sizes of 4, 32 and 256. See Figure~\ref{fig:2_3_bs4}, Figure~\ref
     \label{fig:2_3_bs256}
   \end{subfigure}
   \caption{Training results of LazyNet, BoringNet and CoolNet: \subref{fig:2_1} LazyNet, \subref{fig:2_2} BoringNet, \subref{fig:2_2_1} BoringNet without activations, \subref{fig:2_3_bs4} CoolNet with batch size 4, \subref{fig:2_3_bs32} CoolNet with batch size 32, \subref{fig:2_3_bs256} CoolNet with batch size 256.}
-  \label{fig:images}
+  \label{fig:2}
 \end{figure}
 
 \section{How does learning rate work?}
+See Figure~\ref{fig:3_lr1e2} through \ref{fig:3_lr1e-4}. The model with learning rate 0.01 (Figure~\ref{fig:3_lr1e-2}) performs best. since its validation accuracy is the highest. Its training loss is the lowest too.
+
+\begin{figure}
+  \begin{subfigure}{0.19\textwidth}
+    \centering
+    \includegraphics[width=\linewidth]{accuracies_3_lr1e2.png}
+  \end{subfigure}
+  \begin{subfigure}{0.19\textwidth}
+    \centering
+    \includegraphics[width=\linewidth]{accuracies_3_lr1e-1.png}
+  \end{subfigure}
+  \begin{subfigure}{0.19\textwidth}
+    \centering
+    \includegraphics[width=\linewidth]{accuracies_2_3_bs4.png}
+  \end{subfigure}
+  \begin{subfigure}{0.19\textwidth}
+    \centering
+    \includegraphics[width=\linewidth]{accuracies_3_lr1e-4.png}
+  \end{subfigure}
+
+  \begin{subfigure}{0.19\textwidth}
+    \centering
+    \includegraphics[width=\linewidth]{loss_3_lr1e2.png}
+    \caption{}
+    \label{fig:3_lr1e2}
+  \end{subfigure}
+  \begin{subfigure}{0.19\textwidth}
+    \centering
+    \includegraphics[width=\linewidth]{loss_3_lr1e-1.png}
+    \caption{}
+    \label{fig:3_lr1e-1}
+  \end{subfigure}
+  \begin{subfigure}{0.19\textwidth}
+    \centering
+    \includegraphics[width=\linewidth]{loss_2_3_bs4.png}
+    \caption{}
+    \label{fig:3_lr1e-2}
+  \end{subfigure}
+  \begin{subfigure}{0.19\textwidth}
+    \centering
+    \includegraphics[width=\linewidth]{loss_3_lr1e-4.png}
+    \caption{}
+    \label{fig:3_lr1e-4}
+  \end{subfigure}
+  \caption{Training results of CoolNet. \subref{fig:3_lr1e2} lr=10, \subref{fig:3_lr1e-1} lr=0.1, \subref{fig:3_lr1e-2} lr=0.01 (same as \ref{fig:2_3_bs4}), \subref{fig:3_lr1e-4} lr=0.0001. For \subref{fig:3_lr1e2}, the training loss was as high as 4.1 throughout the training process, which is so high that it does not show up in the figure.}
+  \label{fig:3}
+\end{figure}
 
 \section{Data Augmentation}
 
