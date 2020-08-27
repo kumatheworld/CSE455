@@ -88,7 +88,7 @@ def main():
     print('The log is recorded in ')
     print(net.logFile.name)
 
-    criterion = net.criterion()
+    criterion = net.criterion(args.loss)
     optimizer = net.optimizer()
 
     for epoch in range(args.epochs):  # loop over the dataset multiple times

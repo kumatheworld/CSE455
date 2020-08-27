@@ -6,6 +6,7 @@ import datetime
 import pdb
 import time
 import torchvision.models as torchmodels
+from loss import MSELoss4Classification
 
 class BaseModel(nn.Module):
     def __init__(self):
@@ -23,8 +24,13 @@ class BaseModel(nn.Module):
         print(str)
         self.logFile.write(str + '\n')
 
-    def criterion(self):
-        return nn.CrossEntropyLoss()
+    def criterion(self, loss):
+        if loss == 'cross_entropy':
+            return nn.CrossEntropyLoss()
+        elif loss == 'mse':
+            return MSELoss4Classification
+        else:
+            raise Exception(f"Loss function '{loss}' not implemented!")
 
     def optimizer(self):
         return optim.SGD(self.parameters(), lr=0.001)
