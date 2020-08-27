@@ -173,6 +173,14 @@ See Figure~\ref{fig:4_aug} and Figure~\ref{fig:4_noaug}. The testing accuracy is
     \centering
     \includegraphics[width=\linewidth]{accuracies_4_aug.png}
   \end{subfigure}
+  \begin{subfigure}{0.24\textwidth}
+    \centering
+    \includegraphics[width=\linewidth]{accuracies_2_3_bs4.png}
+  \end{subfigure}
+  \begin{subfigure}{0.24\textwidth}
+    \centering
+    \includegraphics[width=\linewidth]{accuracies_5_mse.png}
+  \end{subfigure}
 
   \begin{subfigure}{0.24\textwidth}
     \centering
@@ -186,11 +194,24 @@ See Figure~\ref{fig:4_aug} and Figure~\ref{fig:4_noaug}. The testing accuracy is
     \caption{}
     \label{fig:4_aug}
   \end{subfigure}
-  \caption{Training results of CoolNet. \subref{fig:4_noaug} epoch=200, \subref{fig:4_aug} epoch=200 with horizontal flipping augmentation.}
+  \begin{subfigure}{0.24\textwidth}
+    \centering
+    \includegraphics[width=\linewidth]{loss_2_3_bs4.png}
+    \caption{}
+    \label{fig:5_ce}
+  \end{subfigure}
+  \begin{subfigure}{0.24\textwidth}
+    \centering
+    \includegraphics[width=\linewidth]{loss_5_mse.png}
+    \caption{}
+    \label{fig:5_mse}
+  \end{subfigure}
+  \caption{Training results of CoolNet. \subref{fig:4_noaug} epoch=200, \subref{fig:4_aug} epoch=200 with horizontal flipping augmentation, \subref{fig:5_ce} Cross entropy loss, \subref{fig:5_ce} Mean squared error loss.}
   \label{fig:45}
 \end{figure}
 
 \section{Change the loss function}
+See Figure~\ref{fig:5_ce} and Figure~\ref{fig:5_mse}. Note that the loss values are not comparable. The model trained with MSE took more time to converge than the one with CE. One possible reason is that for the correct class, the gradient $-2(1-p)$ of the MSE loss is smaller in modulus than the gradient $-1/p$ of the CE loss, which leads to slower training.
 
 \bibliography{report}
 \bibliographystyle{plain}
