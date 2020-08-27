@@ -162,6 +162,33 @@ Figure~\ref{fig:3_e150} shows the training result of the model trained for 150 e
 \end{figure}
 
 \section{Data Augmentation}
+See Figure~\ref{fig:4_aug} and Figure~\ref{fig:4_noaug}. The testing accuracy is significantly better when horizontal augmentation is added although the training loss is higher. That means it successfully alleviated the problem of overfitting.
+
+\begin{figure}
+  \begin{subfigure}{0.24\textwidth}
+    \centering
+    \includegraphics[width=\linewidth]{accuracies_4_noaug.png}
+  \end{subfigure}
+  \begin{subfigure}{0.24\textwidth}
+    \centering
+    \includegraphics[width=\linewidth]{accuracies_4_aug.png}
+  \end{subfigure}
+
+  \begin{subfigure}{0.24\textwidth}
+    \centering
+    \includegraphics[width=\linewidth]{loss_4_noaug.png}
+    \caption{}
+    \label{fig:4_noaug}
+  \end{subfigure}
+  \begin{subfigure}{0.24\textwidth}
+    \centering
+    \includegraphics[width=\linewidth]{loss_4_aug.png}
+    \caption{}
+    \label{fig:4_aug}
+  \end{subfigure}
+  \caption{Training results of CoolNet. \subref{fig:4_noaug} epoch=200, \subref{fig:4_aug} epoch=200 with horizontal flipping augmentation.}
+  \label{fig:45}
+\end{figure}
 
 \section{Change the loss function}
 
